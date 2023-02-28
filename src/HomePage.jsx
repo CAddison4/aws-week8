@@ -1,18 +1,32 @@
 import * as cognito from "./cognito";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "./Header";
 
-export default function HomePage({ onSubmit }) {
+export default function HomePage() {
 	const [errorMessage, setErrorMessage] = useState(null);
+	const navigate = useNavigate();
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		// console.log("form submitted", username, email, password, confirmPassword);
-		onSubmit();
+		handleSignOut();
 		// do something with the form data
 	};
 
+	const handleSignOut = async () => {
+		try {
+			await cognito.signOut();
+			navigate("/login");
+		} catch (error) {
+			console.error(error);
+			setErrorMessage("Error signing out");
+		}
+	};
+
 	return (
-		<div className="App">
+		<div className="flex  flex-col justify-center items-center h-screen">
+			<Header />
 			<h1>Welcome Home</h1>
 
 			<div className="flex items-center justify-between">

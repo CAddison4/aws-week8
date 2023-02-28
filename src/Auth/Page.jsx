@@ -5,6 +5,7 @@ import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
 import { useState } from "react";
 import * as cognito from "../cognito";
+import Header from "../Header";
 
 import ConfirmForm from "./ConfirmEmail";
 
@@ -34,69 +35,69 @@ export default function Page() {
 	// 	}
 	// };
 
-	const handleResetPassword = async ({
-		username,
-		code,
-		newPassword,
-		confirmPassword,
-	}) => {
-		if (newPassword !== confirmPassword) {
-			setErrorMessage("Passwords do not match");
-			return;
-		}
+	// const handleResetPassword = async ({
+	// 	username,
+	// 	code,
+	// 	newPassword,
+	// 	confirmPassword,
+	// }) => {
+	// 	if (newPassword !== confirmPassword) {
+	// 		setErrorMessage("Passwords do not match");
+	// 		return;
+	// 	}
 
-		setErrorMessage("Error resetting password");
+	// 	setErrorMessage("Error resetting password");
 
-		try {
-			await cognito.resetPassword({ username, code, newPassword });
-			setPage("login");
-		} catch (error) {
-			console.error(error);
-			setErrorMessage("Error resetting password");
-		}
-	};
+	// 	try {
+	// 		await cognito.resetPassword({ username, code, newPassword });
+	// 		setPage("login");
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 		setErrorMessage("Error resetting password");
+	// 	}
+	// };
 
-	const handleConfirmEmail = async ({ username, code }) => {
-		try {
-			await cognito.confirmUser({ username, code });
-			setPage("login");
-		} catch (error) {
-			console.error(error);
-			setErrorMessage("Error confirming email");
-		}
-	};
+	// const handleConfirmEmail = async ({ username, code }) => {
+	// 	try {
+	// 		await cognito.confirmUser({ username, code });
+	// 		setPage("login");
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 		setErrorMessage("Error confirming email");
+	// 	}
+	// };
 
-	const handleLogin = async ({ username, password }) => {
-		try {
-			await cognito.signIn({ username, password });
-			setPage("success");
-		} catch (error) {
-			console.error(error);
-			setErrorMessage("Error logging in");
-		}
-	};
+	// const handleLogin = async ({ username, password }) => {
+	// 	try {
+	// 		await cognito.signIn({ username, password });
+	// 		setPage("success");
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 		setErrorMessage("Error logging in");
+	// 	}
+	// };
 
-	const handleForgotPassword = async ({ username }) => {
-		try {
-			await cognito.forgotPassword({ username });
-			setPage("reset");
-		} catch (error) {
-			console.error(error);
-			setErrorMessage("Error resetting password");
-		}
-	};
+	// const handleForgotPassword = async ({ username }) => {
+	// 	try {
+	// 		await cognito.forgotPassword({ username });
+	// 		setPage("reset");
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 		setErrorMessage("Error resetting password");
+	// 	}
+	// };
 
-	const handleSignOut = async () => {
-		try {
-			await cognito.signOut();
-			setPage("login");
-		} catch (error) {
-			console.error(error);
-			setErrorMessage("Error signing out");
-		}
-	};
+	// const handleSignOut = async () => {
+	// 	try {
+	// 		await cognito.signOut();
+	// 		setPage("login");
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 		setErrorMessage("Error signing out");
+	// 	}
+	// };
 
-	let currentForm = null;
+	// let currentForm = null;
 	// switch (page) {
 	// 	// case "signup":
 	// 	// 	currentForm = <SignupForm onSubmit={handleSignup} />;
@@ -121,13 +122,20 @@ export default function Page() {
 	// 		return;
 	// }
 	return (
-		<div className="flex justify-center items-center h-screen">
+		<div className="flex  flex-col justify-center items-center h-screen">
+			<Header />
 			<h1>Auth Page</h1>
-			<Link to="/signup" className="link">
+			{/* <Link to="/signup" className="link">
 				Signup
 			</Link>
+			<Link to="/login" className="link">
+				Login
+			</Link>
+			<Link to="/forgot-password" className="link">
+				Forgot Password
+			</Link> */}
 			{/* <SignupForm onSubmit={handleSignup} /> */}
-			{currentForm}
+			{/* {currentForm}
 			{errorMessage && <p className="text-red-400">{errorMessage}</p>}
 			{page === "signup" && (
 				<button onClick={() => setPage("login")}>Login</button>
@@ -135,7 +143,7 @@ export default function Page() {
 			{page === "login" && (
 				<button onClick={() => setPage("signup")}>Signup</button>
 			)}
-			<button onClick={() => setPage("forgot")}>Forgot Password</button>
+			<button onClick={() => setPage("forgot")}>Forgot Password</button> */}
 		</div>
 	);
 }
