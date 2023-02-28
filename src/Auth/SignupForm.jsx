@@ -20,6 +20,7 @@ export default function SignupForm() {
 		// onSubmit({ username, email, password, confirmPassword });
 
 		// do something with the form data
+		//test
 	};
 
 	const handleSignup = async ({
